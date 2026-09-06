@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+
+  application:
+    name: spring-local-rag
+
+  ai:
+
+    ollama:
+
+      base-url: http://localhost:11434
+
+      chat:
+        model: qwen3
+
+      embedding:
+        model: nomic-embed-text
+
+    vectorstore:
+
+      qdrant:
+
+        host: localhost
+        port: 6334
+
+        collection-name: company_documents
+
+        initialize-schema: true
+
+        use-tls: false
