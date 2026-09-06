@@ -21,6 +21,7 @@ public class DocumentIngestionServiceImpl implements DocumentIngestionService {
     }
 
     @PostConstruct
+    @Override
     public void ingestDocuments() {
         System.out.println("Bean initialized with dependency: " + vectorStore);
 

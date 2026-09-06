@@ -43,31 +43,33 @@ public class RagServiceImpl implements RagService {
                         (a, b) -> a + "\n\n" + b
                 );
         String prompt = """
-        You are a helpful assistant answering questions using the provided context.
+                Answer the question using the context below.
+                
+                CONTEXT:
+                %s
+                
+                QUESTION:
+                %s
+                
+                Rules:
+                - Answer using only the context.
+                - Use proper Markdown formatting.
+                - Use headings, bullet points, and tables when useful.
+                - Use normal spaces between words.
+                - Do not use HTML.
+                - If the answer is unavailable, say:
+                  "I don't know based on the provided documents."
+                
+                ANSWER:
+                """.formatted(context, question);
 
-        Rules:
-        - Answer using only the provided context.
-        - Write in clear, natural English.
-        - Always put spaces between words.
-        - Use proper punctuation.
-        - Return only plain text.
-        - Write complete sentences.
-        - Do not merge words together.
-        - Do not use Markdown formatting unless necessary.
-        - If the answer is not available in the context, say "I don't know based on the provided documents."
-
-        Context:
-        %s
-
-        Question:
-        %s
-
-        Answer:
-        """.formatted(context, question);
-        return chatClient
+        System.out.println(prompt);
+        String response = chatClient
                 .prompt()
                 .user(prompt)
                 .call()
                 .content();
+        System.out.println(response);
+        return response;
     }
 }
